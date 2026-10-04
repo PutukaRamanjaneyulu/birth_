@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>The Countdown ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<audio
+    id="birthdayMusic"
+    loop
+    preload="auto"
+>
+    <source
+        src="assets/birthday-music.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<div class="music-player">
+
+    <button
+        id="musicButton"
+        class="music-button"
+        type="button"
+    >
+        🎵
+    </button>
+
+    <div class="music-info">
+
+        <div class="music-title">
+            Our Song ❤️
+        </div>
+
+        <div
+            id="musicStatus"
+            class="music-status"
+        >
+            Tap to play
+        </div>
+
+    </div>
+
+</div>
+<div class="grain"></div>
+
+<nav class="nav">
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="memories.html" target="_blank">
+        Memories
+    </a>
+
+    <a href="video.html" target="_blank">
+        Video
+    </a>
+
+    <a href="letter.html" target="_blank">
+        Letter
+    </a>
+
+    <a href="final.html" target="_blank">
+        ❤️
+    </a>
+
+</nav>
+
+
+<section class="center-page">
+
+    <div>
+
+        <div class="eyebrow">
+            Chapter 01
+        </div>
+
+        <h1 class="title">
+            The Countdown
+        </h1>
+
+        <p class="subtitle">
+            Counting down to the day
+            the world was blessed with you.
+        </p>
+
+
+        <div class="countdown">
+
+            <div class="time">
+                <strong id="days">00</strong>
+                <span>Days</span>
+            </div>
+
+            <div class="time">
+                <strong id="hours">00</strong>
+                <span>Hours</span>
+            </div>
+
+            <div class="time">
+                <strong id="minutes">00</strong>
+                <span>Minutes</span>
+            </div>
+
+            <div class="time">
+                <strong id="seconds">00</strong>
+                <span>Seconds</span>
+            </div>
+
+        </div>
+
+
+        <a
+            href="memories.html"
+            target="_blank"
+            class="button"
+        >
+            Continue To Our Memories →
+        </a>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ==========================================
+   SET HER BIRTHDAY HERE
+   ========================================== */
+
+/*
+   Example:
+   If her birthday is October 22, use:
+
+   "October 22, 2026 00:00:00"
+
+   Change this to her actual birthday.
+*/
+
+const birthday = new Date(
+    "October 22, 2026 00:00:00"
+).getTime();
+
+
+/* ==========================================
+   COUNTDOWN
+   ========================================== */
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+
+    const difference = birthday - now;
+
+
+    /* Birthday has arrived */
+
+    if (difference <= 0) {
+
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+
+        return;
+    }
+
+
+    /* Calculate time */
+
+    const days = Math.floor(
+        difference /
+        (1000 * 60 * 60 * 24)
+    );
+
+
+    const hours = Math.floor(
+        (
+            difference %
+            (1000 * 60 * 60 * 24)
+        ) /
+        (1000 * 60 * 60)
+    );
+
+
+    const minutes = Math.floor(
+        (
+            difference %
+            (1000 * 60 * 60)
+        ) /
+        (1000 * 60)
+    );
+
+
+    const seconds = Math.floor(
+        (
+            difference %
+            (1000 * 60)
+        ) /
+        1000
+    );
+
+
+    /* Display */
+
+    document.getElementById("days").textContent =
+        String(days).padStart(2, "0");
+
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
+}
+
+
+/* Start immediately */
+
+updateCountdown();
+
+
+/* Update every second */
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+</script>
+
+</body>
+
+</html>
